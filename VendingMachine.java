@@ -2,7 +2,6 @@ import java.util.Scanner;
 public class VendingMachine {
     public static void main(String[] args) {
         // Class Variables
-        String lastPurchasedItem = null; // For exit display
         Boolean exit = false;
         double balance = 0;
         double moneyAdded;
@@ -31,35 +30,32 @@ public class VendingMachine {
             System.out.println(mainMenu); // Main menu shows first 
             
             System.out.print("Please select an option (1-5)");
-         
+
             usersChoice = scnr.nextInt();
-
             if (usersChoice == 1) { // Could use a switch instead
-              System.out.print(displayItems());  
-            } else if (usersChoice == 2) {// Adding money to the users balance
-              System.out.println("Enter amount of money to add to balance.");
-              moneyAdded = scnr.nextDouble();
-              balance += moneyAdded;
-              System.out.println("Added "+moneyAdded+" to your balance.\nYour balance is now " + balance+".");
-              moneyAdded = 0.0;
-            } else if (usersChoice == 3) {// Item purchasing
-                System.out.print("Which item would you like? (1-5):");
-                usersChoice = scnr.nextInt();
-                balance = purchaseItems(usersChoice, balance);
-                System.out.println("Your balance is now "+ balance  +".\n");
-            } else if (usersChoice == 4) {// Balance Inquiry
-                System.out.println("Your balance is " + balance +".\n");
-
-            } else if (usersChoice == 5) {// Exiting program by ending loop
-                String exitMessage = "Exiting the vending machine.\n";
-                if (lastPurchasedItem != null) {
-                    exitMessage += "Enjoy your "+lastPurchasedItem+"!\n";
-                }
-                System.out.println(exitMessage);
-                exit = true;
-            } else {// If invalid data is given
-                System.out.println("Invalid option, please choose an option 1 through 5 from the menu.\n");
-            }
+                System.out.print(displayItems());  
+              } else if (usersChoice == 2) {// Adding money to the users balance
+                System.out.println("Enter amount of money to add to balance.");
+                moneyAdded = scnr.nextDouble();
+                balance += moneyAdded;
+                System.out.println("Added "+moneyAdded+" to your balance.\nYour balance is now " + balance+".");
+              } else if (usersChoice == 3) {// Item purchasing
+                  System.out.print("Which item would you like? (1-5):");
+                  if (scnr.hasNextInt()) {
+                    usersChoice = scnr.nextInt();
+                    balance = purchaseItems(usersChoice, balance);
+                    System.out.println("Your balance is now "+ balance  +".\n");
+                  } else {
+                    System.out.println("Invalid option, please choose an option 1 through 5 from the food options.\n");
+                  }
+              } else if (usersChoice == 4) {// Balance Inquiry
+                  System.out.println("Your balance is " + balance +".\n");
+              } else if (usersChoice == 5) {// Exiting program by ending loop
+                  System.out.println("Exiting the vending machine. Enjoy!\n");
+                  scnr.close();
+                  exit = true;
+              }
+   
         }
     } // End of Main method 
 
