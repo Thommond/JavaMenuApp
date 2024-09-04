@@ -1,17 +1,19 @@
+
 import java.util.Scanner;
+
 public class VendingMachine {
+
     public static void main(String[] args) {
-        // Class Variables
-        Boolean exit = false;
+        // main variables in camelCase
+        boolean exit = false;
         double balance = 0;
         double moneyAdded;
         int usersChoice;
 
         Scanner scnr = new Scanner(System.in);
 
-        // Main menu
+        // Main menu string block
         String mainMenu = """
-                          
                           Menu: 
                           
                           1. Display Items 
@@ -23,39 +25,39 @@ public class VendingMachine {
                           4. Check balance 
                           
                           5. Exit 
-
                           """;
         // Starts main program, only exits on user input
-        while (exit != true) {
+        while (exit == false) {
             System.out.println(mainMenu); // Main menu shows first 
-            
-            System.out.print("Please select an option (1-5)");
+            System.out.println("Please select an option (1-5):");
 
             usersChoice = scnr.nextInt();
+
             if (usersChoice == 1) { // Could use a switch instead
-                System.out.print(displayItems());  
-              } else if (usersChoice == 2) {// Adding money to the users balance
-                System.out.println("Enter amount of money to add to balance.");
+                System.out.println(displayItems());
+
+            } else if (usersChoice == 2) {// Adding to users balance
+                System.out.println("Enter amount of money to add to balance:");
                 moneyAdded = scnr.nextDouble();
                 balance += moneyAdded;
-                System.out.println("Added "+moneyAdded+" to your balance.\nYour balance is now " + balance+".");
-              } else if (usersChoice == 3) {// Item purchasing
-                  System.out.print("Which item would you like? (1-5):");
-                  if (scnr.hasNextInt()) {
-                    usersChoice = scnr.nextInt();
-                    balance = purchaseItems(usersChoice, balance);
-                    System.out.println("Your balance is now "+ balance  +".\n");
-                  } else {
-                    System.out.println("Invalid option, please choose an option 1 through 5 from the food options.\n");
-                  }
-              } else if (usersChoice == 4) {// Balance Inquiry
-                  System.out.println("Your balance is " + balance +".\n");
-              } else if (usersChoice == 5) {// Exiting program by ending loop
-                  System.out.println("Exiting the vending machine. Enjoy!\n");
-                  scnr.close();
-                  exit = true;
-              }
-   
+                System.out.println("Added " + moneyAdded + " to your balance.\n");
+                System.out.println("Your balance is now " + balance + ".\n");
+
+            } else if (usersChoice == 3) {// Item purchasing
+                System.out.println("Which item would you like? (1-5):");
+                usersChoice = scnr.nextInt();
+                balance = purchaseItems(usersChoice, balance);
+                System.out.println("Your balance is now $" + balance + ".\n");
+
+            } else if (usersChoice == 4) {// Balance Inquiry
+                System.out.println("Your balance is $" + balance + ".\n");
+
+            } else if (usersChoice == 5) {// Exiting program by ending loop
+                System.out.println("Exiting the vending machine. Enjoy!");
+                scnr.close();
+                exit = true;
+                
+            }
         }
     } // End of Main method 
 
@@ -72,13 +74,12 @@ public class VendingMachine {
         4. Osmosis bottled water - $2.00
 
         5. Homemade sugar cookies - 2.75
-        \n
         """;
     } // End of displayItems method 
 
     public static double purchaseItems(int choice, double balance) {
         // Check users choice & if they have the funds for the item
-        if (choice == 1 && balance >= 2.50) { 
+        if (choice == 1 && balance >= 2.50) {
             balance -= 2.50;
             System.out.println("You successfully purchased Fizzy Pop.\n");
         } else if (choice == 2 && balance >= 2.25) {
@@ -94,7 +95,7 @@ public class VendingMachine {
             balance -= 2.75;
             System.out.println("You successfully purchased Homemade sugar cookies.\n");
         } else {
-            System.out.println("Invalid choice or insufficent funds. Current balance is "+ balance + ".\n");
+            System.out.println("Invalid choice or insufficent funds.");
         }
 
         return balance;
