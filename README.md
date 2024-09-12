@@ -1,6 +1,6 @@
 # Java Menu Driven App
 
-In this assignment for my Application programming II course the directions state to build a "food vending" application.
+In this assignment as part of my bachelors program the directions state to build a "food vending" application.
 
 ## Requirements
 
